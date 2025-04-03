@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
 import Image from 'next/image';
 import ProjectsList from '@/components/Projects-list';
