@@ -1,10 +1,13 @@
 "use client"
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
 import Image from 'next/image';
+import ProjectsList from '@/components/Projects-list';
 
 export default function HomePage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // Function to handle smooth scrolling to sections
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -15,11 +18,11 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Navigation Bar */}
-      <header className="sticky top-0 bg-white/80 backdrop-blur-sm z-50 py-4 px-8 border-b">
+         {/* Navigation Bar */}
+         <header className="sticky top-0 bg-white/80 backdrop-blur-sm z-50 py-4 px-8 border-b">
         <div className="container mx-auto flex justify-between items-center">
-        <div className="font-bold text-xl">
-        <Image 
+          <div className="font-bold text-xl">
+            <Image 
               src="/images/bd-logo-2.png" 
               alt="Logo" 
               width={100}
@@ -27,37 +30,67 @@ export default function HomePage() {
               className="h-10 w-auto" 
             />
           </div>
-
+          
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8">
-            <button
-              onClick={() => scrollToSection('about')}
-              className="hover:text-emerald-600 transition-colors cursor:pointer"
+            <button 
+              onClick={() => scrollToSection('about')} 
+              className="hover:text-emerald-600 transition-colors cursor-pointer"
             >
               About
             </button>
-            <button
-              onClick={() => scrollToSection('work')}
-              className="hover:text-emerald-600 transition-colors cursor:pointer"
+            <button 
+              onClick={() => scrollToSection('work')} 
+              className="hover:text-emerald-600 transition-colors cursor-pointer"
             >
               Work
             </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="hover:text-emerald-600 transition-colors cursor:pointer"
+            <button 
+              onClick={() => scrollToSection('contact')} 
+              className="hover:text-emerald-600 transition-colors cursor-pointer"
             >
               Contact
             </button>
           </nav>
-
-          {/* Mobile Menu Button (hamburger icon) */}
-          <button className="md:hidden flex flex-col space-y-1.5 cursor-pointer">
-            <span className="block w-6 h-1.5 bg-gray-800 rounded-full"></span>
-            <span className="block w-6 h-1.5 bg-gray-800 rounded-full"></span>
-            <span className="block w-6 h-1.5 bg-gray-800 rounded-full"></span>
-            <span className="block w-6 h-1.5 bg-gray-800 rounded-full"></span>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden flex flex-col space-y-1.5 cursor-pointer"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`block w-6 h-1.5 bg-gray-800 rounded-full transition-transform duration-300 ${mobileMenuOpen ? 'transform rotate-45 translate-y-3' : ''}`}></span>
+            <span className={`block w-6 h-1.5 bg-gray-800 rounded-full transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-1.5 bg-gray-800 rounded-full transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-1.5 bg-gray-800 rounded-full transition-transform duration-300 ${mobileMenuOpen ? 'transform -rotate-45 -translate-y-3' : ''}`}></span>
           </button>
         </div>
+        
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white py-4 px-8 shadow-lg">
+            <nav className="flex flex-col gap-4">
+              <button 
+                onClick={() => scrollToSection('about')} 
+                className="py-2 hover:text-emerald-600 transition-colors text-left cursor-pointer"
+              >
+                About
+              </button>
+              <button 
+                onClick={() => scrollToSection('work')} 
+                className="py-2 hover:text-emerald-600 transition-colors text-left cursor-pointer"
+              >
+                Work
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')} 
+                className="py-2 hover:text-emerald-600 transition-colors text-left cursor-pointer"
+              >
+                Contact
+              </button>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
@@ -231,46 +264,7 @@ export default function HomePage() {
       <section id="work" className="py-20 px-8">
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-12">My Work</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project 1 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Project Title</h3>
-                <p className="text-gray-600 mb-4">Short description of this amazing project</p>
-                <div className="flex gap-2">
-                  <span className="px-2 py-1 bg-gray-100 text-xs rounded">React</span>
-                  <span className="px-2 py-1 bg-gray-100 text-xs rounded">TypeScript</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-blue-500 to-teal-500"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Project Title</h3>
-                <p className="text-gray-600 mb-4">Short description of this amazing project</p>
-                <div className="flex gap-2">
-                  <span className="px-2 py-1 bg-gray-100 text-xs rounded">Next.js</span>
-                  <span className="px-2 py-1 bg-gray-100 text-xs rounded">Tailwind</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 3 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
-              <div className="h-48 bg-gradient-to-r from-amber-500 to-red-500"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Project Title</h3>
-                <p className="text-gray-600 mb-4">Short description of this amazing project</p>
-                <div className="flex gap-2">
-                  <span className="px-2 py-1 bg-gray-100 text-xs rounded">React</span>
-                  <span className="px-2 py-1 bg-gray-100 text-xs rounded">TanStack Query</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProjectsList />
         </div>
       </section>
 
