@@ -18,43 +18,43 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-         {/* Navigation Bar */}
-         <header className="sticky top-0 bg-white/80 backdrop-blur-sm z-50 py-4 px-8 border-b">
+      {/* Navigation Bar */}
+      <header className="sticky top-0 bg-white/80 backdrop-blur-sm z-50 py-4 px-8 border-b">
         <div className="container mx-auto flex justify-between items-center">
           <div className="font-bold text-xl">
-            <Image 
-              src="/images/bd-logo-2.png" 
-              alt="Logo" 
+            <Image
+              src="/images/bd-logo-2.png"
+              alt="Logo"
               width={100}
               height={40}
-              className="h-10 w-auto" 
+              className="h-10 w-auto"
             />
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8">
-            <button 
-              onClick={() => scrollToSection('about')} 
+            <button
+              onClick={() => scrollToSection('about')}
               className="hover:text-emerald-600 transition-colors cursor-pointer"
             >
               About
             </button>
-            <button 
-              onClick={() => scrollToSection('work')} 
+            <button
+              onClick={() => scrollToSection('work')}
               className="hover:text-emerald-600 transition-colors cursor-pointer"
             >
               Work
             </button>
-            <button 
-              onClick={() => scrollToSection('contact')} 
+            <button
+              onClick={() => scrollToSection('contact')}
               className="hover:text-emerald-600 transition-colors cursor-pointer"
             >
               Contact
             </button>
           </nav>
-          
+
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className="md:hidden flex flex-col space-y-1.5 cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -65,25 +65,25 @@ export default function HomePage() {
             <span className={`block w-6 h-1.5 bg-gray-800 rounded-full transition-transform duration-300 ${mobileMenuOpen ? 'transform -rotate-45 -translate-y-3' : ''}`}></span>
           </button>
         </div>
-        
+
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white py-4 px-8 shadow-lg">
             <nav className="flex flex-col gap-4">
-              <button 
-                onClick={() => scrollToSection('about')} 
+              <button
+                onClick={() => scrollToSection('about')}
                 className="py-2 hover:text-emerald-600 transition-colors text-left cursor-pointer"
               >
                 About
               </button>
-              <button 
-                onClick={() => scrollToSection('work')} 
+              <button
+                onClick={() => scrollToSection('work')}
                 className="py-2 hover:text-emerald-600 transition-colors text-left cursor-pointer"
               >
                 Work
               </button>
-              <button 
-                onClick={() => scrollToSection('contact')} 
+              <button
+                onClick={() => scrollToSection('contact')}
                 className="py-2 hover:text-emerald-600 transition-colors text-left cursor-pointer"
               >
                 Contact
@@ -103,7 +103,7 @@ export default function HomePage() {
               Howdy! My Name is Belle
             </h1>
             <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto md:mx-0">
-            Building data-driven applications that solve real-world problems and drive business success.
+              Building data-driven applications that solve real-world problems and drive business success.
             </p>
           </div>
 
@@ -209,10 +209,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <p className="text-lg mb-6">
-              I&aposm passionate about turning data into decisions and code into impactful user experiences. With over 6 years of experience in data analysis and software development, I have honed my skills in creating data-driven applications that solve real-world problems. I bridge the gap between technology and business needs by leveraging SQL, Python, and data visualization to create meaningful software solutions.
+                I{`${"'"}`}m passionate about turning data into decisions and code into impactful user experiences. With over 6 years of experience in data analysis and software development, I have honed my skills in creating data-driven applications that solve real-world problems. I bridge the gap between technology and business needs by leveraging SQL, Python, and data visualization to create meaningful software solutions.
               </p>
               <p className="text-lg">
-                When I&aposm not coding, you can find me tending my garden or chilling with my kittens, Mittens and Kitsune. Talk to me about your favorite anime or the latest tech trends!
+                When I{`${"'"}`}m not coding, you can find me tending my garden or chilling with my kittens, Mittens and Kitsune. Talk to me about your favorite anime or the latest tech trends!
               </p>
             </div>
             <div className="bg-gray-100 rounded-lg p-6">
@@ -279,27 +279,27 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <p className="text-lg mb-6">
-              Need a full-stack developer who understands data? Lets connect! Contact me using the form or through social media.
+                Need a full-stack developer who understands data? Lets connect! Contact me using the form or through social media.
               </p>
               <div className="flex gap-4 mt-6">
-                <a 
-                  href="https://linkedin.com/in/yourusername" 
-                  target="_blank" 
+                <a
+                  href="https://linkedin.com/in/yourusername"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   <FaLinkedin />
                 </a>
-                <a 
-                  href="https://github.com/yourusername" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/yourusername"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   <FaGithub />
                 </a>
-                <a 
-                  href="mailto:your.email@example.com" 
+                <a
+                  href="mailto:your.email@example.com"
                   className="text-2xl text-gray-700 hover:text-red-500 transition-colors"
                 >
                   <FaEnvelope />
