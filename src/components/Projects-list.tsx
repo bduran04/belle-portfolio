@@ -4,6 +4,7 @@ import { useProjects } from '@/hooks/queries/useProjects';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProjectsList() {
   const { data: projects, isLoading, error } = useProjects();
@@ -22,10 +23,13 @@ export default function ProjectsList() {
           </CardHeader>
           <CardContent className="flex-grow">
             <div className="relative w-full h-48 mb-4">
-              <img 
+              <Image 
                 src={project.imageUrl} 
-                alt={project.title} 
-                className="object-cover rounded-md w-full h-full"
+                alt={project.title}
+                width={400}
+                height={200}
+                className="object-cover rounded-md"
+                style={{ width: '100%', height: '100%' }}
               />
             </div>
             <p>{project.description}</p>

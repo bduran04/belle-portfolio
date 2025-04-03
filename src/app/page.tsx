@@ -1,9 +1,8 @@
 "use client"
 
 import React from 'react'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
+import Image from 'next/image';
 
 export default function HomePage() {
   // Function to handle smooth scrolling to sections
@@ -20,10 +19,12 @@ export default function HomePage() {
       <header className="sticky top-0 bg-white/80 backdrop-blur-sm z-50 py-4 px-8 border-b">
         <div className="container mx-auto flex justify-between items-center">
         <div className="font-bold text-xl">
-            <img 
+        <Image 
               src="/images/bd-logo-2.png" 
               alt="Logo" 
-              className="h-10" 
+              width={100}
+              height={40}
+              className="h-10 w-auto" 
             />
           </div>
 
@@ -175,10 +176,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <p className="text-lg mb-6">
-              I’m passionate about turning data into decisions and code into impactful user experiences. With over 6 years of experience in data analysis and software development, I have honed my skills in creating data-driven applications that solve real-world problems. I bridge the gap between technology and business needs by leveraging SQL, Python, and data visualization to create meaningful software solutions.
+              I&aposm passionate about turning data into decisions and code into impactful user experiences. With over 6 years of experience in data analysis and software development, I have honed my skills in creating data-driven applications that solve real-world problems. I bridge the gap between technology and business needs by leveraging SQL, Python, and data visualization to create meaningful software solutions.
               </p>
               <p className="text-lg">
-                When I'm not coding, you can find me tending my garden or chilling with my kittens, Mittens and Kitsune. Talk to me about your favorite anime or the latest tech trends!
+                When I&aposm not coding, you can find me tending my garden or chilling with my kittens, Mittens and Kitsune. Talk to me about your favorite anime or the latest tech trends!
               </p>
             </div>
             <div className="bg-gray-100 rounded-lg p-6">
