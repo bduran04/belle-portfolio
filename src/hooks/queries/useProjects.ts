@@ -1,5 +1,7 @@
+"use client";
+
 import { useQuery } from '@tanstack/react-query';
-import { fetcher } from '@/api/services/base';
+import supabase from '@/lib/supabase';
 
 // Query keys
 export const projectKeys = {
@@ -14,23 +16,56 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
   tags: string[];
-  demoUrl?: string;
-  repoUrl?: string;
+  demo_url?: string;
+  repo_url?: string;
 }
 
 export function useProjects() {
   return useQuery({
     queryKey: projectKeys.lists(),
-    queryFn: () => fetcher<Project[]>('/projects'),
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
+        
+      console.log('Raw projects data:', data);
+        
+      if (error) {
+        throw new Error(`Error fetching projects: ${error.message}`);
+      }
+      
+      // Ensure tags are properly parsed if needed
+      const parsedData = data?.map(project => ({
+        ...project,
+        tags: Array.isArray(project.tags) ? project.tags : JSON.parse(project.tags || '[]')
+      }));
+      
+      console.log('Parsed projects data:', parsedData);
+      
+      return parsedData as Project[];
+    },
   });
 }
 
 export function useProject(id: string) {
   return useQuery({
     queryKey: projectKeys.detail(id),
-    queryFn: () => fetcher<Project>(`/projects/${id}`),
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('id', id)
+        .single();
+        
+      if (error) {
+        throw new Error(`Error fetching project: ${error.message}`);
+      }
+      
+      return data as Project;
+    },
     enabled: !!id,
   });
 }

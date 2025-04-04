@@ -4,9 +4,15 @@ import React, { useState } from 'react'
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
 import Image from 'next/image';
 import ProjectsList from '@/components/Projects-list';
+import { useContactForm } from '../hooks/mutations/use-contact-form';
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   // Function to handle smooth scrolling to sections
   const scrollToSection = (id: string) => {
@@ -16,12 +22,37 @@ export default function HomePage() {
     }
   };
 
+  const contactMutation = useContactForm();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    contactMutation.mutate(formData, {
+      onSuccess: () => {
+        // Reset form on success
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navigation Bar */}
       <header className="sticky top-0 bg-white/80 backdrop-blur-sm z-50 py-4 px-8 border-b">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="font-bold text-xl">
+          <button
+            className="font-bold text-xl bg-transparent border-0 p-0 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="Scroll to top"
+          >
             <Image
               src="/images/bd-logo-2.png"
               alt="Logo"
@@ -29,7 +60,7 @@ export default function HomePage() {
               height={40}
               className="h-10 w-auto"
             />
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8">
@@ -209,7 +240,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <p className="text-lg mb-6">
-                I{`${"'"}`}m passionate about turning data into decisions and code into impactful user experiences. With over 6 years of experience in data analysis and software development, I have honed my skills in creating data-driven applications that solve real-world problems. I bridge the gap between technology and business needs by leveraging SQL, Python, and data visualization to create meaningful software solutions.
+                I{`${"'"}`}m passionate about turning data into decisions and code into impactful user experiences. With over 6 years of experience in data analysis and software development, I bridge the gap between technology and business needs by leveraging SQL, Python, and data visualization to create meaningful software solutions.
               </p>
               <p className="text-lg">
                 When I{`${"'"}`}m not coding, you can find me tending my garden or chilling with my kittens, Mittens and Kitsune. Talk to me about your favorite anime or the latest tech trends!
@@ -269,85 +300,122 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <div className="container mx-auto px-8">
-        <hr className="border-gray-200" />
-      </div>
-
-      <section id="contact" className="py-20 px-8 bg-pink-100">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Get In Touch</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <p className="text-lg mb-6">
-                Need a full-stack developer who understands data? Lets connect! Contact me using the form or through social media.
-              </p>
-              <div className="flex gap-4 mt-6">
-                <a
-                  href="https://linkedin.com/in/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-2xl text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  <FaLinkedin />
-                </a>
-                <a
-                  href="https://github.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-2xl text-gray-700 hover:text-gray-900 transition-colors"
-                >
-                  <FaGithub />
-                </a>
-                <a
-                  href="mailto:your.email@example.com"
-                  className="text-2xl text-gray-700 hover:text-red-500 transition-colors"
-                >
-                  <FaEnvelope />
-                </a>
-              </div>
-            </div>
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="px-6 py-3 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+      <>
+        <div className="container mx-auto px-8">
+          <hr className="border-gray-200" />
         </div>
-      </section>
 
+        <section id="contact" className="py-20 px-8 bg-pink-100">
+          <div className="container mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">Get In Touch</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div>
+                <p className="text-lg mb-6">
+                  Need a full-stack developer who understands data? Let{`${"'"}`}s connect! Contact me using the form or through social media.
+                </p>
+                <div className="flex gap-4 mt-6">
+
+                  <a
+                    href="https://www.linkedin.com/in/belle-duran-127760204/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-2xl text-gray-700 hover:text-blue-600 transition-colors"
+                  >
+                    <FaLinkedin />
+                  </a>
+
+                  <a
+                    href="https://github.com/bduran04"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-2xl text-gray-700 hover:text-gray-900 transition-colors"
+                  >
+                    <FaGithub />
+                  </a>
+
+                  <a
+                    href="mailto:bduran04@gmail.com"
+                    className="text-2xl text-gray-700 hover:text-red-500 transition-colors"
+                  >
+                    <FaEnvelope />
+                  </a>
+                </div>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Form status messages */}
+                {contactMutation.isSuccess && (
+                  <div className="p-4 bg-green-100 text-green-800 rounded-md">
+                    Thank you for your message! I{`${"'"}`}ll get back to you soon.
+                  </div>
+                )}
+
+                {contactMutation.isError && (
+                  <div className="p-4 bg-red-100 text-red-800 rounded-md">
+                    Oops! There was an error sending your message. Please try again or email me directly.
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    required
+                    disabled={contactMutation.isPending}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    required
+                    disabled={contactMutation.isPending}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    required
+                    disabled={contactMutation.isPending}
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={contactMutation.isPending}
+                  className="px-6 py-3 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors disabled:bg-emerald-400"
+                >
+                  {contactMutation.isPending ? 'Sending...' : 'Send Message'}
+                </button>
+              </form>
+            </div>
+          </div>
+        </section >
+      </>
       {/* Footer */}
-      <footer className="py-8 px-8 bg-pink-100">
+      < footer className="py-8 px-8 bg-pink-100" >
         <div className="container mx-auto text-center">
           <p>© {new Date().getFullYear()} Made with ♡ by Belle. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   )
 }

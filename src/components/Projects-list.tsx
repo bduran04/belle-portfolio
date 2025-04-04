@@ -1,6 +1,6 @@
 "use client";
 
-import { useProjects } from '@/hooks/queries/useProjects';
+import { useProjects } from '../hooks/queries/useProjects';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -13,9 +13,15 @@ export default function ProjectsList() {
   if (error) return <div>Error loading projects</div>;
   if (!projects || projects.length === 0) return <div>No projects found</div>;
 
+  const sortedProjects = [...projects].sort((a, b) => {
+    if (a.title === "Dine Flow") return -1;
+    if (b.title === "Dine Flow") return 1;
+    return 0;
+  });
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {projects.map((project) => (
+      {sortedProjects.map((project) => (
         <Card key={project.id} className="flex flex-col h-full">
           <CardHeader>
             <CardTitle>{project.title}</CardTitle>
@@ -23,8 +29,8 @@ export default function ProjectsList() {
           </CardHeader>
           <CardContent className="flex-grow">
             <div className="relative w-full h-48 mb-4">
-              <Image 
-                src={project.imageUrl} 
+              <Image
+                src={project.image_url}
                 alt={project.title}
                 width={400}
                 height={200}
@@ -35,14 +41,14 @@ export default function ProjectsList() {
             <p>{project.description}</p>
           </CardContent>
           <CardFooter className="flex justify-between">
-            {project.demoUrl && (
+            {project.demo_url && (
               <Button asChild variant="outline">
-                <Link href={project.demoUrl} target="_blank">Demo</Link>
+                <Link href={project.demo_url} target="_blank">Demo</Link>
               </Button>
             )}
-            {project.repoUrl && (
+            {project.repo_url && (
               <Button asChild>
-                <Link href={project.repoUrl} target="_blank">Code</Link>
+                <Link href={project.repo_url} target="_blank">Code</Link>
               </Button>
             )}
           </CardFooter>
