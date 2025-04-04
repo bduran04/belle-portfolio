@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Belle's Portfolio
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js, TypeScript, TanStack Query, and Supabase.
 
-First, run the development server:
+![Portfolio Screenshot](./public/images/portfolio.png)
+Deployed Site: https://belle-portfolio.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Responsive Design** - Optimized for all device sizes
+- **Project Showcase** - Display your projects with images and descriptions
+- **Contact Form** - Allow visitors to send messages directly through Formspree
+- **Animated UI Elements** - Engaging user experience with smooth animations
+- **SEO Optimized** - Built with best practices for search engine visibility
+- **TypeScript** - Type-safe code for better development experience
+- **TanStack Query** - Efficient data fetching and state management
+- **Supabase Integration** - Database for storing and retrieving projects
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend**
+  - Next.js 15.x (App Router)
+  - TypeScript
+  - TailwindCSS
+  - React Icons
+  - TanStack Query (React Query)
 
-## Learn More
+- **Backend**
+  - Supabase (PostgreSQL)
+  - Formspree (Contact Form)
 
-To learn more about Next.js, take a look at the following resources:
+- **Deployment**
+  - Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Installation & Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/bduran04/belle-portfolio.git
+   cd belle-portfolio
